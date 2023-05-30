@@ -1,68 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" 
-       content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" >      </script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js">      </script>
     <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js">    </script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js">
     </script>
     <title>Document</title>
 </head>
+
 <body>
     <div id="app"></div>
-  
-  <script type="text/babel">
 
-      class App extends React.Component {
-        state = {
-            age: 28,
-            name: 'diala'
-        }
-        handleClick = (e) => {
-            console.log(e);
-            console.log(this.state);
-            for(let f in e){
-                console.log(`${f} : ${e[f]}`);
+    <script type="text/babel">
+
+        class App extends React.Component {
+            state = {
+                mouse_x: 0,
+                mouse_y: 0
             }
-            this.setState({
-                age: this.state.age + 1
-            })
+            handleMouseMove = (e) => {
+                this.setState({
+                    mouse_x: e.pageX,
+                    mouse_y: e.pageY
+                })
+            }
+
+            render() {
+                return (
+                    <div className="app-content">
+                        <h1>Hello World!!</h1>
+                        <hr />
+                        <p>X = <b>{this.state.mouse_x}</b> , Y = <b>{this.state.mouse_y}</b>.</p>
+                        <button style={{ height: 300, width: 300 }} onMouseMove={this.handleMouseMove}>Detect X,Y</button>
+
+                    </div>
+                )
+            }
         }
-        handleMouseOver = (e) => {
-            console.log(`(${e.pageX}, ${e.pageY})`);
-        }
-        handleCopy = (e) => {
-            console.log("try to be original for once ...");
-            alert("try to be original for once ...")
-        }
-        render()
-        {
-          return(
-            <div className="app-content">
-              <h1>Hello World!!</h1>
-              <p onCopy={this.handleCopy}>My name is <b>{this.state.name} </b>
-                 and my age is <b>{this.state.age}</b></p>
-              <hr />
-              <button onClick={this.handleClick}>Click me</button>
-              <br />
-              <button 
-               onMouseOver={this.handleMouseOver}
-               onMouseLeave={(e) => {console.log("bye");}}>
-               <br />Hover me....
-               <br /></button>
-            </div>
-          )
-        }
-      }
-      ReactDOM.render(<App />, document.getElementById('app'));
-	  
-	  // for fun
-	  const elem = <h1>Hello World!</h1>
+        ReactDOM.render(<App />, document.getElementById('app'));
+
+        // for fun
+        const elem = <h1>Hello World!</h1>
     </script>
 
-  </body>
-  </html>
+</body>
+
+</html>
