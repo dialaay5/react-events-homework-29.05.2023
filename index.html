@@ -1,68 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" 
-       content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" >      </script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js">      </script>
     <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js">    </script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js">
     </script>
     <title>Document</title>
 </head>
+
 <body>
     <div id="app"></div>
-  
-  <script type="text/babel">
 
-      class App extends React.Component {
-        state = {
-            age: 28,
-            name: 'diala'
-        }
-        handleClick = (e) => {
-            console.log(e);
-            console.log(this.state);
-            for(let f in e){
-                console.log(`${f} : ${e[f]}`);
+    <script type="text/babel">
+
+        class App extends React.Component {
+            state = {
+                form_input: {
+                    name: ' ',
+                    vegetarian: ' ',
+                    birthDay: ' ',
+                    country: ' ',
+                    gender: ' ',
+                }
             }
-            this.setState({
-                age: this.state.age + 1
-            })
+            handleSubmit = (e) => {
+                e.preventDefault();
+                this.setState({
+                    form_input: {
+                        name: document.getElementById("input_name").value,
+                        vegetarian: document.querySelector('input[name="checkboxresult"]:checked').value,
+                        birthDay: document.getElementById("birthday").value,
+                        country: document.getElementById("country").options[(document.getElementById("country")).selectedIndex].value,
+                        gender: document.querySelector('input[name="gender"]:checked').value,
+                    }
+                })
+            }
+
+            render() {
+                return (
+                    <div className="app-content">
+                        <h1>Hello World!!</h1>
+                        <br />
+                        <p>My name is : {this.state.form_input.name}</p>
+                        <p>Are you a vegetarian ? {this.state.form_input.vegetarian}</p>
+                        <p>BirthDay : {this.state.form_input.birthDay}</p>
+                        <p>Country : {this.state.form_input.country}</p>
+                        <p>Gender : {this.state.form_input.gender}</p>
+
+                        <form onSubmit={this.handleSubmit}>
+
+                            <p>name :<input type="text" id="input_name" required /></p>
+
+                            <p>are you a vegetarian ? 
+                                <input type="checkbox" name="checkboxresult" value="yes" />
+                                <label for="option1"> yes</label>
+                                <input type="checkbox" name="checkboxresult" value="no" />
+                                <label for="option2"> no</label></p>
+
+                            <p>birthday : <input type="date" id="birthday" name="birthday" required /></p>
+
+                            <p><label for="country">Choose a country :</label>
+                                <select name="country" id="country">
+                                    <option value="united States">United States</option>
+                                    <option value="spain">Spain</option>
+                                    <option value="france">France</option>
+                                </select></p>
+
+                            <p>Please select your gender :
+                                <input type="radio" id="male" name="gender" value="Male" required />
+                                <label >Male</label>
+                                <input type="radio" id="female" name="gender" value="Female" required />
+                                <label >Female</label></p>
+                            <br />
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                )
+            }
         }
-        handleMouseOver = (e) => {
-            console.log(`(${e.pageX}, ${e.pageY})`);
-        }
-        handleCopy = (e) => {
-            console.log("try to be original for once ...");
-            alert("try to be original for once ...")
-        }
-        render()
-        {
-          return(
-            <div className="app-content">
-              <h1>Hello World!!</h1>
-              <p onCopy={this.handleCopy}>My name is <b>{this.state.name} </b>
-                 and my age is <b>{this.state.age}</b></p>
-              <hr />
-              <button onClick={this.handleClick}>Click me</button>
-              <br />
-              <button 
-               onMouseOver={this.handleMouseOver}
-               onMouseLeave={(e) => {console.log("bye");}}>
-               <br />Hover me....
-               <br /></button>
-            </div>
-          )
-        }
-      }
-      ReactDOM.render(<App />, document.getElementById('app'));
-	  
-	  // for fun
-	  const elem = <h1>Hello World!</h1>
+        ReactDOM.render(<App />, document.getElementById('app'));
+
+        // for fun
+        const elem = <h1>Hello World!</h1>
     </script>
 
-  </body>
-  </html>
+</body>
+
+</html>
