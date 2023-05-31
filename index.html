@@ -18,27 +18,6 @@
   <script type="text/babel">
 
       class App extends React.Component {
-        state = {
-            age: 28,
-            name: 'diala'
-        }
-        handleClick = (e) => {
-            console.log(e);
-            console.log(this.state);
-            for(let f in e){
-                console.log(`${f} : ${e[f]}`);
-            }
-            this.setState({
-                age: this.state.age + 1
-            })
-        }
-        handleMouseOver = (e) => {
-            console.log(`(${e.pageX}, ${e.pageY})`);
-        }
-        handleCopy = (e) => {
-            console.log("try to be original for once ...");
-            alert("try to be original for once ...")
-        }
 
         handleDoubleClick = (event) =>{
                 console.log("double-click");
@@ -48,17 +27,7 @@
           return(
             <div className="app-content">
               <h1>Hello World!!</h1>
-              <p onCopy={this.handleCopy}>My name is <b>{this.state.name} </b>
-                 and my age is <b>{this.state.age}</b></p>
-              <hr />
-              <button onClick={this.handleClick}>Click me</button>
-              <br />
-              <button 
-               onMouseOver={this.handleMouseOver}
-               onMouseLeave={(e) => {console.log("bye");}}>
-               <br />Hover me....
-               <br /></button>
-               <hr />
+              <br/>
                <button onDoubleClick={this.handleDoubleClick}>Click Double Click</button>
             </div>
           )
