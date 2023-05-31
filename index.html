@@ -41,9 +41,7 @@
         }
 
         handleDoubleClick = (event) =>{
-            if(event.detail == 2){
                 console.log("double-click");
-            }
         }
         render()
         {
@@ -61,13 +59,12 @@
                <br />Hover me....
                <br /></button>
                <hr />
-               <button onClick={this.handleDoubleClick}>Click Double Click</button>
+               <button onDoubleClick={this.handleDoubleClick}>Click Double Click</button>
             </div>
           )
         }
       }
       ReactDOM.render(<App />, document.getElementById('app'));
-	  //detail property on the event gives the click count.
 	  // for fun
 	  const elem = <h1>Hello World!</h1>
     </script>
